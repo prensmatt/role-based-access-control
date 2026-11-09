@@ -1,0 +1,42 @@
+{{define "title"}}RBAC System{{end}}
+{{define "main"}}
+<div class="rbac-container">
+    <div class="rbac-card">
+        <div class="rbac-header">
+            <h2>User Permissions</h2>
+            <p>Review and manage access control levels.</p>
+        </div>
+
+        <table class="rbac-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Group</th>
+                    <th>Role</th>
+                    <th class="text-center">Create</th>
+                    <th class="text-center">Read</th>
+                    <th class="text-center">Update</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Users}}
+                <tr>
+                    <td class="username">{{.Username}}</td>
+                    <td class="group-tag">{{.GroupName}}</td>
+                    <td class="role-text">{{.Role.RoleName}}</td>
+                    <td class="text-center">{{if .Role.CanCreate}}✅{{else}}❌{{end}}</td>
+                    <td class="text-center">{{if .Role.CanRead}}✅{{else}}❌{{end}}</td>
+                    <td class="text-center">{{if .Role.CanUpdate}}✅{{else}}❌{{end}}</td>
+                    <td class="text-center">{{if .Role.CanDelete}}✅{{else}}❌{{end}}</td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="7" class="empty-state">No users found.</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{end}}
